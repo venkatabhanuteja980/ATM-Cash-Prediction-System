@@ -1,57 +1,137 @@
+/* ============================================================
+   Dashboard Page – Bright Banking Theme + Entrance Animations
+   ============================================================ */
+
+/* ── Welcome card entrance ── */
 .dashboard-placeholder-card {
-    max-width: 600px;
+    max-width: 620px;
     width: 100%;
-    padding: 48px 36px;
+    padding: 52px 44px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fadeSlideUp 0.55s ease 0.1s both;
 }
 
+/* ── ATM Icon container ── */
 .dashboard-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: var(--radius-md);
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    background: var(--primary-light);
+    border: 1.5px solid rgba(21, 101, 192, 0.2);
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
+    /* Continuous gentle float */
+    animation: float 4s ease-in-out infinite;
 }
 
+/* ── Title ── */
 .dashboard-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 800;
     color: var(--text-main);
+    letter-spacing: -0.02em;
     margin-bottom: 16px;
 }
 
+/* ── Body text ── */
 .dashboard-message {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 28px;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 32px;
     max-width: 480px;
 }
 
+/* ── Status tag (Bootstrap badge) ── */
 .dashboard-status-tag {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 18px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--bg-card-border);
+    padding: 8px 20px;
+    background: var(--success-light);
+    border: 1px solid #BBF7D0;
     border-radius: 999px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--success);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.dashboard-status-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
+}
+
+/* Green pulse dot inside the status tag */
 .status-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--primary);
+    background-color: var(--success);
+    flex-shrink: 0;
+    animation: atmPulse 2.5s ease-in-out infinite;
+}
+
+/* ── Stat card grid (scaffold for future backend data) ── */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+}
+
+.stat-card {
+    padding: 24px 20px;
+    text-align: center;
+    /* Staggered entrance */
+    animation: fadeSlideUp 0.5s ease both;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Stagger the stat cards */
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+}
+
+.stat-card .stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+    .dashboard-placeholder-card {
+        padding: 36px 20px;
+    }
+
+    .dashboard-title {
+        font-size: 1.6rem;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+    }
 }
