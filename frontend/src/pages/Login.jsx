@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { loginUser, googleLoginUser } from '../services/api';
 import { GoogleLogin } from '@react-oauth/google';
+import { useAuth } from '../context/AuthContext';
 import './AuthPages.css';
 
 /**
@@ -16,6 +17,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,11 +28,8 @@ const Login = () => {
 
             const data = await loginUser({ email, password });
 
-            // Store JWT token
-            localStorage.setItem('token', data.token);
-
-            // Store user information
-            localStorage.setItem('user', JSON.stringify(data.user));
+            // Store token and user via AuthContext (also sets localStorage)
+            login(data.token, data.user);
 
             // Go to dashboard
             navigate('/dashboard');
@@ -50,8 +49,8 @@ const Login = () => {
                 <div className="auth-header">
                     <div className="auth-logo">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" strokeWidth="2.5"
-                             strokeLinecap="round" strokeLinejoin="round">
+                            stroke="currentColor" strokeWidth="2.5"
+                            strokeLinecap="round" strokeLinejoin="round">
                             <rect x="2" y="6" width="20" height="12" rx="2" />
                             <circle cx="12" cy="12" r="3" />
                             <path d="M6 12h.01M18 12h.01" />
@@ -67,10 +66,10 @@ const Login = () => {
                     {/* Bootstrap alert for errors */}
                     {error && (
                         <div className="alert alert-danger d-flex align-items-center gap-2"
-                             role="alert">
+                            role="alert">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" strokeWidth="2.5"
-                                 strokeLinecap="round" strokeLinejoin="round">
+                                stroke="currentColor" strokeWidth="2.5"
+                                strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="12" cy="12" r="10" />
                                 <line x1="12" y1="8" x2="12" y2="12" />
                                 <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -129,36 +128,35 @@ const Login = () => {
                         ) : 'Login'}
                     </Button>
                     <div className="text-center my-3">
-    <span className="text-muted">OR</span>
-</div>
+                        <span className="text-muted">OR</span>
+                    </div>
 
-<div className="d-flex justify-content-center">
-   <GoogleLogin
-    onSuccess={async (credentialResponse) => {
-        try {
-            setError('');
-            setLoading(true);
+                    <div className="d-flex justify-content-center">
+                        <GoogleLogin
+                            onSuccess={async (credentialResponse) => {
+                                try {
+                                    setError('');
+                                    setLoading(true);
 
-            const data = await googleLoginUser(
-                credentialResponse.credential
-            );
+                                    const data = await googleLoginUser(
+                                        credentialResponse.credential
+                                    );
 
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+                                    login(data.token, data.user);
 
-            navigate('/dashboard');
+                                    navigate('/dashboard');
 
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }}
-    onError={() => {
-        setError('Google Login Failed');
-    }}
-/>
-</div>
+                                } catch (error) {
+                                    setError(error.message);
+                                } finally {
+                                    setLoading(false);
+                                }
+                            }}
+                            onError={() => {
+                                setError('Google Login Failed');
+                            }}
+                        />
+                    </div>
                 </form>
 
                 {/* ── Footer ── */}

@@ -1,3 +1,4 @@
+const atmRoutes = require("./routes/atmRoutes");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -14,6 +15,7 @@ app.use(express.json());
 
 //Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/atms", atmRoutes);
 // MongoDB Connection
 mongoose
     .connect(process.env.MONGO_URI)

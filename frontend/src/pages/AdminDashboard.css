@@ -1,0 +1,352 @@
+/* ============================================================
+   Admin Dashboard Page - Bright Banking Theme
+   ============================================================ */
+
+.admin-dashboard-container {
+    animation: fadeSlideUp 0.4s ease both;
+}
+
+/* ── Header ── */
+.admin-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.admin-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+}
+
+.admin-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* ── Access Denied Screen ── */
+.admin-denied-card {
+    max-width: 480px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 48px 36px;
+}
+
+.admin-denied-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: var(--danger-light);
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.admin-denied-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+
+.admin-denied-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* ── Stats Grid (4 Summary Cards) ── */
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    padding: 20px 22px;
+    border-radius: var(--radius-md);
+    background: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.stat-icon-wrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-total {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.icon-active {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.icon-maintenance {
+    background-color: var(--warning-light);
+    color: var(--warning);
+}
+
+.icon-inactive {
+    background-color: var(--danger-light);
+    color: var(--danger);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.stat-footer {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Accent Card Borders */
+.stat-total {
+    border-top: 3px solid var(--primary);
+}
+
+.stat-active {
+    border-top: 3px solid var(--success);
+}
+
+.stat-maintenance {
+    border-top: 3px solid var(--warning);
+}
+
+.stat-inactive {
+    border-top: 3px solid var(--danger);
+}
+
+/* ── Table Styling ── */
+.table-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.custom-atm-table {
+    font-size: 0.9rem;
+}
+
+.custom-atm-table th {
+    background-color: #F8FAFC;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.custom-atm-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #F1F5F9;
+    color: var(--text-main);
+}
+
+.custom-atm-table tbody tr:hover {
+    background-color: #F8FAFC;
+}
+
+.max-w-address {
+    max-width: 260px;
+}
+
+.action-btn {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+}
+
+/* ── Responsive Grid & Table ── */
+@media (max-width: 992px) {
+    .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-header-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ── Modal Overlay & Card ── */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    z-index: 1060;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: fadeIn 0.2s ease both;
+}
+
+.atm-modal-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 660px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.atm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.atm-modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.btn-close-custom {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.btn-close-custom:hover {
+    color: var(--text-main);
+    background: var(--bg-page);
+}
+
+.atm-modal-body {
+    padding: 24px;
+}
+
+/* ── Responsive Form Grid ── */
+.atm-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.span-full {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+    .atm-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.atm-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background-color: #F8FAFC;
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+/* ── Delete Confirmation Card ── */
+.delete-confirm-card {
+    max-width: 440px;
+}
+
+.delete-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--danger-light);
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

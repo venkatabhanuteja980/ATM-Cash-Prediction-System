@@ -54,3 +54,90 @@ export const googleLoginUser = async (credential) => {
 
     return data;
 };
+
+// Fetch all ATMs
+export const getATMs = async () => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/atms`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch ATMs");
+    }
+
+    return data;
+};
+
+// Create new ATM
+export const createATM = async (atmData) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/atms`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(atmData)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to create ATM");
+    }
+
+    return data;
+};
+
+// Update ATM
+export const updateATM = async (id, atmData) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/atms/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(atmData)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to update ATM");
+    }
+
+    return data;
+};
+
+// Delete ATM
+export const deleteATM = async (id) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/atms/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to delete ATM");
+    }
+
+    return data;
+};
+
